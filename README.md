@@ -1,0 +1,1 @@
+provide xterm as a demo of an X11 application inside a container
