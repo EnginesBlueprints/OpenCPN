@@ -50,19 +50,24 @@
     },
     "ports": [
       {
-        "port": 6000,
-        "external": 6000,
+        "port": "6000",
+        "external": "6000",
+        "protocol": "tcp"
+      },
+      {
+        "port": "2222",
+        "external": "2222",
         "protocol": "tcp"
       }
     ],
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "sshd -D"
+        "content": "\r\n/usr/sbin/sshd  -f /home/app/ssh/sshd.conf -D -E /home/app/logs/ssh.log &\r\nwait \r\nsleep 600"
       },
       "install": {
         "language": "sh",
-        "content": ""
+        "content": "#!/bin/bash\r\nmkdir /home/app/logs/ /home/app/ssh\r\n"
       },
       "post_install": {
         "language": "sh",
@@ -80,6 +85,10 @@
       {
         "package": "xterm",
         "version": ""
+      },
+      {
+        "package": "openssh-server",
+        "version": ""
       }
     ],
     "installed_packages": [
@@ -95,7 +104,11 @@
 
     ],
     "template_files": [
-
+      {
+        "path": "ssh/sshd.conf",
+        "language": "text",
+        "content": "Port 2222\r\n# Use these options to restrict which interfaces/protocols sshd will bind to\r\n#ListenAddress ::\r\nListenAddress 0.0.0.0\r\nProtocol 2\r\n# HostKeys for protocol version 2\r\nHostKey /home/app/ssh/ssh_host_rsa_key\r\nHostKey /home/app/ssh/ssh_host_dsa_key\r\nHostKey /home/app/ssh/ssh_host_ecdsa_key\r\nHostKey /home/app/ssh/ssh_host_ed25519_key\r\n#Privilege Separation is turned on for security\r\nUsePrivilegeSeparation no\r\n\r\n# Lifetime and size of ephemeral version 1 server key\r\nKeyRegenerationInterval 3600\r\nServerKeyBits 1024\r\n\r\n# Logging\r\nSyslogFacility AUTH\r\nLogLevel INFO\r\n\r\n# Authentication:\r\nLoginGraceTime 120\r\nPermitRootLogin no\r\nStrictModes yes\r\n\r\nRSAAuthentication yes\r\nPubkeyAuthentication yes\r\nAuthorizedKeysFile    /home/app/keys/authorized_keys\r\n\r\n# Don't read the user's ~/.rhosts and ~/.shosts files\r\nIgnoreRhosts yes\r\n# For this to work you will also need host keys in /home/auth/static/ssl/ssh_known_hosts\r\nRhostsRSAAuthentication no\r\n# similar for protocol version 2\r\nHostbasedAuthentication no\r\n# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication\r\nIgnoreUserKnownHosts yes\r\n\r\n# To enable empty passwords, change to yes (NOT RECOMMENDED)\r\nPermitEmptyPasswords no\r\n\r\n# Change to yes to enable challenge-response passwords (beware issues with\r\n# some PAM modules and threads)\r\nChallengeResponseAuthentication no\r\n\r\n# Change to no to disable tunnelled clear text passwords\r\n#PasswordAuthentication yes\r\n\r\n# Kerberos options\r\n#KerberosAuthentication no\r\n#KerberosGetAFSToken no\r\n#KerberosOrLocalPasswd yes\r\n#KerberosTicketCleanup yes\r\n\r\n# GSSAPI options\r\n#GSSAPIAuthentication no\r\n#GSSAPICleanupCredentials yes\r\n\r\nX11Forwarding yes\r\nX11DisplayOffset 10\r\nPrintMotd no\r\nPrintLastLog yes\r\nTCPKeepAlive yes\r\n#UseLogin no\r\n\r\n#MaxStartups 10:30:60\r\n#Banner /home/auth/ssl/issue.net\r\n\r\n# Allow client to pass locale environment variables\r\nAcceptEnv LANG LC_*\r\n\r\n# Allow client to pass locale environment variables\r\nAcceptEnv LANG LC_*\r\n\r\n\r\n\r\n# Set this to 'yes' to enable PAM authentication, account processing,\r\n# and session processing. If this is enabled, PAM authentication will\r\n# be allowed through the ChallengeResponseAuthentication and\r\n# PasswordAuthentication.  Depending on your PAM configuration,\r\n# PAM authentication via ChallengeResponseAuthentication may bypass\r\n# the setting of \"PermitRootLogin without-password\".\r\n# If you just want the PAM account and session checks to run without\r\n# PAM authentication, then enable this but set PasswordAuthentication\r\n# and ChallengeResponseAuthentication to 'no'.\r\nUsePAM no\r\n"
+      }
     ],
     "replacement_strings": [
 
