@@ -58,7 +58,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": ""
+        "content": "sshd -D"
       },
       "install": {
         "language": "sh",
@@ -147,34 +147,34 @@
         "return_type": "none",
         "return_file_name": "",
         "enable_logging": false,
-        "script": {
-          "language": "sh",
-          "content": "#!/bin/bash\r\n\r\ncat - /home/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\n\r\nenv DISPLAY=$host:0 xterm"
-        },
         "variables": [
           {
             "name": "host",
             "value": "",
             "mandatory": false,
             "input": {
-              "label": "",
               "type": "string",
+              "label": "",
               "title": "Host",
               "comment": "",
               "hint": "",
               "placeholder": "",
-              "collection": {
-                "items": {
-                },
-                "include_blank": false
-              },
               "validation": {
                 "pattern": "",
                 "message": ""
+              },
+              "collection": {
+                "include_blank": false,
+                "items": {
+                }
               }
             }
           }
-        ]
+        ],
+        "script": {
+          "language": "sh",
+          "content": "#!/bin/bash\r\n\r\ncat - /home/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\n\r\nenv DISPLAY=$host:0 xterm"
+        }
       }
     ],
     "schedules": [
