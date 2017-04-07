@@ -50,13 +50,13 @@
     },
     "ports": [
       {
-        "port": "6000",
-        "external": "6000",
+        "port": 6000,
+        "external": 6000,
         "protocol": "tcp"
       },
       {
-        "port": "2222",
-        "external": "2222",
+        "port": 2222,
+        "external": 2222,
         "protocol": "tcp"
       }
     ],
@@ -79,7 +79,10 @@
       }
     },
     "external_repositories": [
-
+      {
+        "url": "https://ppa.opencpn/opencpn/",
+        "key": ""
+      }
     ],
     "system_packages": [
       {
@@ -88,6 +91,10 @@
       },
       {
         "package": "openssh-server",
+        "version": ""
+      },
+      {
+        "package": "opencpn",
         "version": ""
       }
     ],
