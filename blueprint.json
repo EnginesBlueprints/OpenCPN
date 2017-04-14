@@ -80,7 +80,7 @@
     },
     "external_repositories": [
       {
-        "url": "https://ppa.opencpn/opencpn/",
+        "url": "ppa:opencpn/opencpn",
         "key": ""
       }
     ],
@@ -135,11 +135,11 @@
 
     ],
     "components": {
+      "path": "",
+      "extract": false,
       "sources": [
 
-      ],
-      "path": "",
-      "extract": false
+      ]
     },
     "workers": {
       "blocking": "",
