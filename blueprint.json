@@ -63,7 +63,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "\r\n/usr/sbin/sshd  -f /home/app/ssh/sshd.conf -D -E /home/app/logs/ssh.log &\r\nwait \r\nsleep 600"
+        "content": "\r\n/usr/sbin/sshd  -f /home/app/ssh/sshd.conf -D -E /home/app/logs/ssh.log &\r\nsleep &\r\nwait \r\n"
       },
       "install": {
         "language": "sh",
