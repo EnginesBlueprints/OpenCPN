@@ -63,7 +63,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "\r\n/usr/sbin/sshd  -f /home/app/ssh/sshd.conf -D -E /home/app/logs/ssh.log &\r\nsleep &\r\nwait \r\n"
+        "content": "\r\n/usr/sbin/sshd  -f /home/app/ssh/sshd.conf -D -E /home/app/logs/ssh.log &\r\n#FIXme needs to be in loop for ever\r\nsleep 3600 &\r\nwait \r\n"
       },
       "install": {
         "language": "sh",
