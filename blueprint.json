@@ -130,7 +130,7 @@
     ],
     "persistent_directories": [
       {
-        "path": "/home/app/logs/"
+        "path": "app/logs/"
       }
     ],
     "persistent_files": [
