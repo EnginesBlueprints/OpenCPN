@@ -36,8 +36,8 @@
       "name": "opencpn",
       "framework": "x11",
       "memory": {
-        "required": "256",
-        "recommended": "300"
+        "required": 256,
+        "recommended": 300
       },
       "http_protocol": "http_only",
       "framework_port_override": "",
@@ -158,76 +158,55 @@
     ],
     "actionators": [
       {
-        "name": "launch",
-        "label": "launch",
-        "description": "",
-        "return_type": "none",
-        "return_file_name": "",
+        "name": "single_access",
+        "label": "Create single access key",
+        "description": "Save private key",
+        "return_type": "file",
+        "return_file_name": "private_key",
         "enable_logging": false,
-        "variables": [
-          {
-            "name": "host",
-            "value": "",
-            "mandatory": false,
-            "input": {
-              "type": "string",
-              "label": "",
-              "title": "Host",
-              "comment": "",
-              "hint": "",
-              "placeholder": "",
-              "validation": {
-                "pattern": "",
-                "message": ""
-              },
-              "collection": {
-                "include_blank": false,
-                "items": {
-                }
-              }
-            }
-          }
-        ],
         "script": {
           "language": "sh",
-          "content": "#!/bin/bash\r\n\r\ncat - /home/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\n\r\nenv DISPLAY=$host:0 xterm"
-        }
+          "content": "#!/bin/bash\r\nssh-keygen -q -N \"\" -f /home/app/.ssh/single_access\r\ncat /home/app/.ssh/single_access.pub > /home/app/.ssh/authorized_keys\r\n# Option to remove?\r\ncat /home/app/.ssh/single_access"
+        },
+        "variables": [
+
+        ]
       },
       {
-        "name": "test",
-        "label": "",
+        "name": "upload_access_key",
+        "label": "Upload public for access",
         "description": "",
         "return_type": "none",
         "return_file_name": "",
         "enable_logging": false,
+        "script": {
+          "language": "sh",
+          "content": "#!/bin/bash\r\n\r\n\r\ncat -  | /home/engines/bin/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\ncat $public_key > /home/app/.ssh/authorized_keys\r\n"
+        },
         "variables": [
           {
-            "name": "dir",
+            "name": "public_key",
             "value": "",
             "mandatory": true,
             "input": {
-              "type": "string",
               "label": "",
+              "type": "text",
               "title": "",
               "comment": "",
               "hint": "",
               "placeholder": "",
+              "collection": {
+                "items": {
+                },
+                "include_blank": false
+              },
               "validation": {
                 "pattern": "",
                 "message": ""
-              },
-              "collection": {
-                "include_blank": false,
-                "items": {
-                }
               }
             }
           }
-        ],
-        "script": {
-          "language": "sh",
-          "content": "!#/bin/bash\r\ncat - /home/json_to_env >/tmp/.env\r\n. /tmp/.env\r\nls $dir"
-        }
+        ]
       }
     ],
     "schedules": [
