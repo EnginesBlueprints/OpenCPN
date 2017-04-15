@@ -164,13 +164,13 @@
         "return_type": "file",
         "return_file_name": "private_key",
         "enable_logging": false,
-        "variables": [
-
-        ],
         "script": {
           "language": "sh",
-          "content": "#!/bin/bash\r\nssh-keygen -q -N \"\" -f /home/app/.ssh/single_access\r\ncat /home/app/.ssh/single_access.pub > /home/app/.ssh/authorized_keys\r\n# Option to remove?\r\ncat /home/app/.ssh/single_access"
-        }
+          "content": "#!/bin/bash\r\nssh-keygen -q -N \"\" -f /home/app/.ssh/single_access\r\ncp /home/app/.ssh/single_access.pub  /home/app/.ssh/authorized_keys\r\n# Option to remove?\r\ncat /home/app/.ssh/single_access"
+        },
+        "variables": [
+
+        ]
       },
       {
         "name": "upload_access_key",
@@ -179,34 +179,34 @@
         "return_type": "none",
         "return_file_name": "",
         "enable_logging": false,
+        "script": {
+          "language": "sh",
+          "content": "#!/bin/bash\r\n\r\n\r\ncat -  | /home/engines/bin/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\ncat $public_key > /home/app/.ssh/authorized_keys\r\n"
+        },
         "variables": [
           {
             "name": "public_key",
             "value": "",
             "mandatory": true,
             "input": {
-              "type": "text",
               "label": "public_key",
+              "type": "text",
               "title": "public key",
               "comment": "",
               "hint": "",
               "placeholder": "",
+              "collection": {
+                "items": {
+                },
+                "include_blank": false
+              },
               "validation": {
                 "pattern": "",
                 "message": ""
-              },
-              "collection": {
-                "include_blank": false,
-                "items": {
-                }
               }
             }
           }
-        ],
-        "script": {
-          "language": "sh",
-          "content": "#!/bin/bash\r\n\r\n\r\ncat -  | /home/engines/bin/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\ncat $public_key > /home/app/.ssh/authorized_keys\r\n"
-        }
+        ]
       }
     ],
     "schedules": [
