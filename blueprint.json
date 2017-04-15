@@ -189,9 +189,9 @@
             "value": "",
             "mandatory": true,
             "input": {
-              "label": "",
+              "label": "public_key",
               "type": "text",
-              "title": "",
+              "title": "public key",
               "comment": "",
               "hint": "",
               "placeholder": "",
@@ -210,23 +210,7 @@
       }
     ],
     "schedules": [
-      {
-        "label": "test",
-        "timespec": {
-          "minute": "",
-          "hour": "",
-          "day_of_month": "",
-          "month": "",
-          "day_of_week": ""
-        },
-        "instruction": "action",
-        "actionator": {
-          "name": "test",
-          "params": {
-            "dir": "/"
-          }
-        }
-      }
+
     ]
   }
 }
