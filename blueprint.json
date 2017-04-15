@@ -181,7 +181,7 @@
         "enable_logging": false,
         "script": {
           "language": "sh",
-          "content": "#!/bin/bash\r\n\r\n\r\ncat -  | /home/engines/bin/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\ncat $public_key > /home/app/.ssh/authorized_keys\r\n"
+          "content": "#!/bin/bash\r\n\r\ncat - > /tmp/params\r\n\r\ncat  /tmp/params | /home/engines/bin/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\ncat $public_key > /home/app/.ssh/authorized_keys\r\n"
         },
         "variables": [
           {
