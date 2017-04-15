@@ -58,7 +58,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "\r\n/usr/sbin/sshd  -D -E /home/app/logs/ssh.log &\r\n#FIXme needs to be in loop for ever\r\nsleep 3600 &\r\nwait \r\n"
+        "content": ""
       },
       "install": {
         "language": "sh",
@@ -164,13 +164,13 @@
         "return_type": "plain_text",
         "return_file_name": "private_key",
         "enable_logging": false,
+        "variables": [
+
+        ],
         "script": {
           "language": "sh",
           "content": "#!/bin/bash\r\nssh-keygen -q -N \"\" -f /home/app/.ssh/single_access\r\ncp /home/app/.ssh/single_access.pub  /home/app/.ssh/authorized_keys\r\n# Option to remove?\r\ncat /home/app/.ssh/single_access"
-        },
-        "variables": [
-
-        ]
+        }
       },
       {
         "name": "upload_access_key",
@@ -179,34 +179,34 @@
         "return_type": "none",
         "return_file_name": "",
         "enable_logging": false,
-        "script": {
-          "language": "sh",
-          "content": "#!/bin/bash\r\n\r\ncat - > /tmp/params\r\n\r\ncat  /tmp/params | /home/engines/bin/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\ncat $public_key > /home/app/.ssh/authorized_keys\r\n"
-        },
         "variables": [
           {
             "name": "public_key",
             "value": "",
             "mandatory": true,
             "input": {
-              "label": "public_key",
               "type": "text",
+              "label": "public_key",
               "title": "public key",
               "comment": "",
               "hint": "",
               "placeholder": "",
-              "collection": {
-                "items": {
-                },
-                "include_blank": false
-              },
               "validation": {
                 "pattern": "",
                 "message": ""
+              },
+              "collection": {
+                "include_blank": false,
+                "items": {
+                }
               }
             }
           }
-        ]
+        ],
+        "script": {
+          "language": "sh",
+          "content": "#!/bin/bash\r\n\r\ncat - > /tmp/params\r\n\r\ncat  /tmp/params | /home/engines/bin/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\ncat $public_key > /home/app/.ssh/authorized_keys\r\n"
+        }
       },
       {
         "name": "get_single_access_key",
@@ -215,13 +215,13 @@
         "return_type": "file",
         "return_file_name": "priv_key",
         "enable_logging": false,
+        "variables": [
+
+        ],
         "script": {
           "language": "sh",
           "content": "#!/bin/bash\r\n\r\ncat /home/app/.ssh/single_access"
-        },
-        "variables": [
-
-        ]
+        }
       }
     ],
     "schedules": [
