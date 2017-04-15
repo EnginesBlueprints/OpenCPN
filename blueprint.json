@@ -158,10 +158,10 @@
     ],
     "actionators": [
       {
-        "name": "single_access",
+        "name": "create_single_access",
         "label": "Create single access key",
         "description": "Save private key",
-        "return_type": "file",
+        "return_type": "plain_text",
         "return_file_name": "private_key",
         "enable_logging": false,
         "script": {
@@ -206,6 +206,21 @@
               }
             }
           }
+        ]
+      },
+      {
+        "name": "get_single_access_key",
+        "label": "",
+        "description": "",
+        "return_type": "file",
+        "return_file_name": "priv_key",
+        "enable_logging": false,
+        "script": {
+          "language": "sh",
+          "content": "#!/bin/bash\r\n\r\ncat /home/app/.ssh/single_access"
+        },
+        "variables": [
+
         ]
       }
     ],
