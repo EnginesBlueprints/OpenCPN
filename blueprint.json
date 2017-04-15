@@ -197,10 +197,62 @@
           "language": "sh",
           "content": "#!/bin/bash\r\n\r\ncat - /home/json_to_env >/tmp/.env\r\n. /tmp/.env\r\n\r\n\r\nenv DISPLAY=$host:0 xterm"
         }
+      },
+      {
+        "name": "test",
+        "label": "",
+        "description": "",
+        "return_type": "none",
+        "return_file_name": "",
+        "enable_logging": false,
+        "variables": [
+          {
+            "name": "dir",
+            "value": "",
+            "mandatory": true,
+            "input": {
+              "type": "string",
+              "label": "",
+              "title": "",
+              "comment": "",
+              "hint": "",
+              "placeholder": "",
+              "validation": {
+                "pattern": "",
+                "message": ""
+              },
+              "collection": {
+                "include_blank": false,
+                "items": {
+                }
+              }
+            }
+          }
+        ],
+        "script": {
+          "language": "sh",
+          "content": "!#/bin/bash\r\ncat - /home/json_to_env >/tmp/.env\r\n. /tmp/.env\r\nls $dir"
+        }
       }
     ],
     "schedules": [
-
+      {
+        "label": "test",
+        "timespec": {
+          "minute": "",
+          "hour": "",
+          "day_of_month": "",
+          "month": "",
+          "day_of_week": ""
+        },
+        "instruction": "action",
+        "actionator": {
+          "name": "test",
+          "params": {
+            "dir": "/"
+          }
+        }
+      }
     ]
   }
 }
