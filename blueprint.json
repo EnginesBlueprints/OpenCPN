@@ -103,7 +103,31 @@
 
     ],
     "environment_variables": [
-
+      {
+        "name": "X11COMMAND",
+        "value": "opencpn",
+        "mandatory": false,
+        "ask_at_build_time": false,
+        "build_time_only": false,
+        "immutable": true,
+        "input": {
+          "label": "",
+          "type": "string",
+          "title": "",
+          "comment": "",
+          "hint": "",
+          "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": false
+          },
+          "validation": {
+            "pattern": "",
+            "message": ""
+          }
+        }
+      }
     ],
     "template_files": [
       {
